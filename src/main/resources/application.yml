@@ -1,0 +1,17 @@
+server:
+  port: 10001
+spring:
+  application:
+    name: Raymond Blog
+  datasource:
+    url: jdbc:mysql:///student_active?serverTimeZone=UTC
+    username: root
+    password: root040921
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
