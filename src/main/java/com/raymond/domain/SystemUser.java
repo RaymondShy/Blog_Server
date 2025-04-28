@@ -14,7 +14,7 @@ public class SystemUser extends BaseEntity implements Serializable {
     private String tel;
     private String email;
     private String loginIp;
-    private String registerTime;
+    private Date registerTime;
     private String avatar;
     private String bio;
     private String website;
@@ -36,7 +36,7 @@ public class SystemUser extends BaseEntity implements Serializable {
                 ", tel='" + tel + '\'' +
                 ", email='" + email + '\'' +
                 ", loginIp='" + loginIp + '\'' +
-                ", registerTime='" + registerTime + '\'' +
+                ", registerTime=" + registerTime +
                 ", avatar='" + avatar + '\'' +
                 ", bio='" + bio + '\'' +
                 ", website='" + website + '\'' +
@@ -104,11 +104,11 @@ public class SystemUser extends BaseEntity implements Serializable {
         this.loginIp = loginIp;
     }
 
-    public String getRegisterTime() {
+    public Date getRegisterTime() {
         return registerTime;
     }
 
-    public void setRegisterTime(String registerTime) {
+    public void setRegisterTime(Date registerTime) {
         this.registerTime = registerTime;
     }
 
@@ -179,7 +179,7 @@ public class SystemUser extends BaseEntity implements Serializable {
     public SystemUser() {
     }
 
-    public SystemUser(Long userId, String nickName, String userName, String password, String tel, String email, String loginIp, String registerTime, String avatar, String bio, String website, String status, Date lastLoginTime, String lastLoginIp, Date createTime, Date updateTime) {
+    public SystemUser(Long userId, String nickName, String userName, String password, String tel, String email, String loginIp, Date registerTime, String avatar, String bio, String website, String status, Date lastLoginTime, String lastLoginIp, Date createTime, Date updateTime) {
         this.userId = userId;
         this.nickName = nickName;
         this.userName = userName;

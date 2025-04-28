@@ -2,6 +2,7 @@ package com.raymond.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.raymond.domain.SystemUser;
+import com.raymond.domain.UserTest;
 import com.raymond.dto.UserDto;
 
 import java.util.List;
@@ -11,4 +12,6 @@ import java.util.List;
  */
 public interface SystemUserService {
     public Page<SystemUser> search(UserDto userDto);
+    // TODO 测试登录 后续要接入Security
+    public int login(UserTest userTest);
 }
