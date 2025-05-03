@@ -1,14 +1,15 @@
 package com.raymond.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.raymond.domain.SystemUser;
+import com.raymond.domain.system.SystemUser;
 import com.raymond.dto.UserDto;
 import com.raymond.service.SystemUserService;
 import com.raymond.utils.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 @RestController
 @RequestMapping("/api/system")
@@ -18,9 +19,30 @@ public class SystemUserController {
     private SystemUserService systemUserService;
 
     @GetMapping("/search")
+//    @PreAuthorize("hasAnyAuthority('/api/system/search')")
     public AjaxResult search(UserDto userDto) {
         Page<SystemUser> page = this.systemUserService.search(userDto);
         return AjaxResult.success(page);
+    }
+
+    @DeleteMapping("/{idList}")
+    public AjaxResult delete(@PathVariable Long[] idList) {
+        int row = this.systemUserService.deleteUserById(idList);
+        return row > 0 ? AjaxResult.success("Delete user successfully") : AjaxResult.error("Failed to delete user");
+    }
+
+    @PostMapping
+    public AjaxResult add(@RequestBody SystemUser systemUser) {
+        systemUser.setRegisterTime(new Date());
+        int row = this.systemUserService.addUser(systemUser);
+        return row >0 ? AjaxResult.success("Add user successfully") : AjaxResult.error("Failed to add user");
+    }
+
+    @PutMapping
+    public AjaxResult update(@RequestBody SystemUser systemUser) {
+        systemUser.setUpdateTime(new Date());
+        int row = this.systemUserService.editUser(systemUser);
+        return row > 0 ? AjaxResult.success("Update user successfully") : AjaxResult.error("Failed to update user");
     }
 
 }

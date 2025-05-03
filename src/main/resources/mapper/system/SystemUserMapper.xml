@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.raymond.mapper.SystemUserMapper">
+
+    <resultMap id="SystemUserResult" type="SystemUser">
+        <id column="user_id" property="userId"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="user_name" property="userName"/>
+        <result column="login_ip" property="loginIp"/>
+        <result column="register_time" property="registerTime"/>
+        <result column="email" property="email"/>
+        <result column="avatar" property="avatar"/>
+        <result column="bio" property="bio"/>
+        <result column="website" property="website"/>
+        <result column="status" property="status"/>
+        <result column="last_login_time" property="lastLoginTime"/>
+        <result column="last_login_ip" property="lastLoginIp"/>
+        <result column="sex" property="sex"/>
+        <result column="tel" property="tel"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <collection property="roleList" javaType="java.util.List" resultMap="SystemRoleResult"/>
+    </resultMap>
+
+    <resultMap id="SystemRoleResult" type="SystemRole">
+        <id column="role_id" property="roleId"/>
+        <result column="role_name" property="roleName"/>
+        <result column="role_code" property="roleCode"/>
+        <result column="description" property="description"/>
+        <collection property="permissionList" javaType="java.util.List" resultMap="SystemPermissionResult"/>
+    </resultMap>
+
+    <resultMap id="SystemPermissionResult" type="SystemPermission">
+        <id column="permission_id" property="permissionId"/>
+        <result column="perm_name" property="permName"/>
+        <result column="url" property="url"/>
+    </resultMap>
+
+<!--    根据用户名查询角色所有权限-->
+    <select id="getUserAllPermissionByUsername" parameterType="String" resultType="SystemPermission">
+        select system_permission.* from system_user
+                    left join system_user_role on  system_user.user_id = system_user_role.user_id
+                    left join system_role on system_user_role.role_id = system_role.role_id
+                    left join system_role_permission on system_role.role_id = system_role_permission.role_id
+                    left join system_permission on  system_role_permission.permission_id = system_permission.permission_id
+        where system_user.user_name = #{username}
+    </select>
+
+
+</mapper>

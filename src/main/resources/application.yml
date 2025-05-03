@@ -1,5 +1,5 @@
 server:
-  port: 10001
+  port: 10002
 spring:
   application:
     name: Raymond Blog
@@ -15,3 +15,5 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
+  type-aliases-package: com.raymond.domain
+  mapper-locations: classpath*:/mapper/**/*.xml

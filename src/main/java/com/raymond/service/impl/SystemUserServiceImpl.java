@@ -1,12 +1,13 @@
 package com.raymond.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.raymond.domain.SystemUser;
+import com.raymond.domain.system.SystemPermission;
+import com.raymond.domain.system.SystemUser;
 import com.raymond.domain.UserTest;
 import com.raymond.dto.UserDto;
 import com.raymond.mapper.SystemUserMapper;
@@ -15,9 +16,11 @@ import com.raymond.utils.IpUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.List;
 
 
 @Service
@@ -59,6 +62,44 @@ public class SystemUserServiceImpl implements SystemUserService {
                 .set(SystemUser::getLastLoginTime,new Date());
         this.systemUserMapper.update(systemUser, updateWrapper);
         return 1;
+    }
+
+    @Transactional(rollbackFor = Exception.class) // 添加事务回滚
+    @Override
+    public int deleteUserById(Long[] idList) {
+        if (idList == null || idList.length == 0) {
+            return 0;
+        }
+        LambdaQueryWrapper<SystemUser> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.in(SystemUser::getUserId, idList);
+        return this.systemUserMapper.delete(lambdaQueryWrapper);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int addUser(SystemUser systemUser) {
+        String ip = IpUtils.getIpAddr(request); // 登录IP
+        systemUser.setLoginIp(ip);
+        int row = this.systemUserMapper.insert(systemUser);
+        return row;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int editUser(SystemUser systemUser) {
+        return this.systemUserMapper.updateById(systemUser);
+    }
+
+    @Override
+    public SystemUser getUserByUsername(String username) {
+        LambdaQueryWrapper<SystemUser> lambdaQueryWrapper = new LambdaQueryWrapper<SystemUser>().eq(SystemUser::getUserName, username);
+        SystemUser systemUser = this.systemUserMapper.selectOne(lambdaQueryWrapper);
+        return systemUser;
+    }
+
+    @Override
+    public List<SystemPermission> getUserPermissionByUsername(String username) {
+        return this.systemUserMapper.getUserAllPermissionByUsername(username);
     }
 
     // 安全获取排序字段方法

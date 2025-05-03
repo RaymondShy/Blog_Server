@@ -1,7 +1,11 @@
-package com.raymond.domain;
+package com.raymond.domain.system;
+
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.raymond.domain.BaseEntity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户实体
@@ -18,35 +22,17 @@ public class SystemUser extends BaseEntity implements Serializable {
     private String avatar;
     private String bio;
     private String website;
+    private String sex;
     private String status;
     private Date lastLoginTime;
     private String lastLoginIp;
     private Date createTime;
     private Date updateTime;
 
-    public static final String SYSTEM_NICK_NAME = "nick_name";
+    @TableField(exist = false)
+    private List<SystemRole> roleList;
 
-    @Override
-    public String toString() {
-        return "SystemUser{" +
-                "userId=" + userId +
-                ", nickName='" + nickName + '\'' +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", tel='" + tel + '\'' +
-                ", email='" + email + '\'' +
-                ", loginIp='" + loginIp + '\'' +
-                ", registerTime=" + registerTime +
-                ", avatar='" + avatar + '\'' +
-                ", bio='" + bio + '\'' +
-                ", website='" + website + '\'' +
-                ", status='" + status + '\'' +
-                ", lastLoginTime=" + lastLoginTime +
-                ", lastLoginIp='" + lastLoginIp + '\'' +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                '}';
-    }
+    public static final String SYSTEM_NICK_NAME = "nick_name";
 
     public Long getUserId() {
         return userId;
@@ -136,6 +122,14 @@ public class SystemUser extends BaseEntity implements Serializable {
         this.website = website;
     }
 
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -176,10 +170,42 @@ public class SystemUser extends BaseEntity implements Serializable {
         this.updateTime = updateTime;
     }
 
+    public List<SystemRole> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<SystemRole> roleList) {
+        this.roleList = roleList;
+    }
+
+    @Override
+    public String toString() {
+        return "SystemUser{" +
+                "userId=" + userId +
+                ", nickName='" + nickName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", tel='" + tel + '\'' +
+                ", email='" + email + '\'' +
+                ", loginIp='" + loginIp + '\'' +
+                ", registerTime=" + registerTime +
+                ", avatar='" + avatar + '\'' +
+                ", bio='" + bio + '\'' +
+                ", website='" + website + '\'' +
+                ", sex='" + sex + '\'' +
+                ", status='" + status + '\'' +
+                ", lastLoginTime=" + lastLoginTime +
+                ", lastLoginIp='" + lastLoginIp + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", roleList=" + roleList +
+                '}';
+    }
+
     public SystemUser() {
     }
 
-    public SystemUser(Long userId, String nickName, String userName, String password, String tel, String email, String loginIp, Date registerTime, String avatar, String bio, String website, String status, Date lastLoginTime, String lastLoginIp, Date createTime, Date updateTime) {
+    public SystemUser(Long userId, String nickName, String userName, String password, String tel, String email, String loginIp, Date registerTime, String avatar, String bio, String website, String sex, String status, Date lastLoginTime, String lastLoginIp, Date createTime, Date updateTime, List<SystemRole> roleList) {
         this.userId = userId;
         this.nickName = nickName;
         this.userName = userName;
@@ -191,10 +217,12 @@ public class SystemUser extends BaseEntity implements Serializable {
         this.avatar = avatar;
         this.bio = bio;
         this.website = website;
+        this.sex = sex;
         this.status = status;
         this.lastLoginTime = lastLoginTime;
         this.lastLoginIp = lastLoginIp;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.roleList = roleList;
     }
 }
