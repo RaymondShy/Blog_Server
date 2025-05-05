@@ -91,4 +91,5 @@ public class HttpStatus
      * 系统警告消息
      */
     public static final int WARN = 601;
+    public static final int CREATE_USER_REPEAT = 602;
 }

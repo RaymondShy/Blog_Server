@@ -25,4 +25,6 @@ public interface SystemUserService {
     public SystemUser getUserByUsername(String username);
     // 根据用户名查询用户权限
     public List<SystemPermission> getUserPermissionByUsername(String username);
+    // 新增用户时查询用户名、昵称、邮箱、电话号是否重复
+    public SystemUser getUserDetail(SystemUser systemUser);
 }

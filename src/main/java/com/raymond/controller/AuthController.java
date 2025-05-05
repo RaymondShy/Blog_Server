@@ -28,14 +28,17 @@ public class AuthController {
     private JWTTokenUtil jwtTokenUtil;
 
     @PostMapping("/pwd")
-    public AjaxResult createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+    public AjaxResult createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
+            throws Exception {
         try{
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken
+                    (authenticationRequest.getUsername(),
                     authenticationRequest.getPassword()));
         }catch (BadCredentialsException e){
             throw new Exception("Incorrect username or password", e);
         }
-        final UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        final UserDetails userDetails = jwtUserDetailsService.
+                loadUserByUsername(authenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails.getUsername());
         return AjaxResult.success("登录成功",token);
 //

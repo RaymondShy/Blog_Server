@@ -1,6 +1,7 @@
 package com.raymond.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.raymond.common.HttpStatus;
 import com.raymond.domain.system.SystemUser;
 import com.raymond.dto.UserDto;
 import com.raymond.service.SystemUserService;
@@ -19,7 +20,7 @@ public class SystemUserController {
     private SystemUserService systemUserService;
 
     @GetMapping("/search")
-//    @PreAuthorize("hasAnyAuthority('/api/system/search')")
+    @PreAuthorize("hasAnyAuthority('/api/system/search')")
     public AjaxResult search(UserDto userDto) {
         Page<SystemUser> page = this.systemUserService.search(userDto);
         return AjaxResult.success(page);
@@ -33,6 +34,10 @@ public class SystemUserController {
 
     @PostMapping
     public AjaxResult add(@RequestBody SystemUser systemUser) {
+        SystemUser detail = this.systemUserService.getUserDetail(systemUser);
+        if (detail != null) {
+            return AjaxResult.error(HttpStatus.CREATE_USER_REPEAT,"User already exist");
+        }
         systemUser.setRegisterTime(new Date());
         int row = this.systemUserService.addUser(systemUser);
         return row >0 ? AjaxResult.success("Add user successfully") : AjaxResult.error("Failed to add user");

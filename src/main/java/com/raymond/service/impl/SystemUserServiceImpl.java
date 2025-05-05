@@ -15,6 +15,7 @@ import com.raymond.service.SystemUserService;
 import com.raymond.utils.IpUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +31,8 @@ public class SystemUserServiceImpl implements SystemUserService {
     private SystemUserMapper systemUserMapper;
     @Autowired
     private HttpServletRequest request;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public Page<SystemUser> search(UserDto userDto) {
@@ -75,11 +78,17 @@ public class SystemUserServiceImpl implements SystemUserService {
         return this.systemUserMapper.delete(lambdaQueryWrapper);
     }
 
+    /**
+     * 创建用户时，用户名、昵称、邮箱、手机号不能重复
+     * @param systemUser
+     * @return
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int addUser(SystemUser systemUser) {
         String ip = IpUtils.getIpAddr(request); // 登录IP
         systemUser.setLoginIp(ip);
+        systemUser.setPassword(passwordEncoder.encode(systemUser.getPassword()));
         int row = this.systemUserMapper.insert(systemUser);
         return row;
     }
@@ -100,6 +109,20 @@ public class SystemUserServiceImpl implements SystemUserService {
     @Override
     public List<SystemPermission> getUserPermissionByUsername(String username) {
         return this.systemUserMapper.getUserAllPermissionByUsername(username);
+    }
+
+    @Override
+    public SystemUser getUserDetail(SystemUser systemUser) {
+        LambdaQueryWrapper<SystemUser> lambdaQueryWrapper = new LambdaQueryWrapper<SystemUser>();
+        lambdaQueryWrapper.eq(SystemUser::getUserName, systemUser.getUserName())
+                .or()
+                .eq(SystemUser::getNickName, systemUser.getNickName())
+                .or()
+                .eq(SystemUser::getEmail, systemUser.getEmail())
+                .or()
+                .eq(SystemUser::getTel, systemUser.getTel());
+        SystemUser user = this.systemUserMapper.selectOne(lambdaQueryWrapper);
+        return user;
     }
 
     // 安全获取排序字段方法
