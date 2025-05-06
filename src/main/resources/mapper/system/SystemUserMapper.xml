@@ -37,8 +37,21 @@
         <result column="perm_name" property="permName"/>
         <result column="url" property="url"/>
     </resultMap>
+    <insert id="addUserRole">
+        insert into system_user_role
+        (
+         <if test="user_id != null and user_id != 0">user_id,</if>
+         <if test="role_id != null and role_id != 0">role_id,</if>
+         create_time
+        )
+        values (
+        <if test="user_id != null and user_id != 0">#{userId},</if>
+        <if test="role_id != null and role_id != 0">#{roleId},</if>
+        #{createTime}
+        )
+    </insert>
 
-<!--    根据用户名查询角色所有权限-->
+    <!--    根据用户名查询角色所有权限-->
     <select id="getUserAllPermissionByUsername" parameterType="String" resultType="SystemPermission">
         select system_permission.* from system_user
                     left join system_user_role on  system_user.user_id = system_user_role.user_id

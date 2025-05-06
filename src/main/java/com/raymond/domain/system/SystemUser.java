@@ -1,6 +1,8 @@
 package com.raymond.domain.system;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.raymond.domain.BaseEntity;
 
 import java.io.Serializable;
@@ -11,6 +13,7 @@ import java.util.List;
  * 用户实体
  */
 public class SystemUser extends BaseEntity implements Serializable {
+    @TableId(type = IdType.AUTO)
     private Long userId;
     private String nickName;
     private String userName;

@@ -7,10 +7,15 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.raymond.domain.system.SystemPermission;
+import com.raymond.domain.system.SystemRole;
 import com.raymond.domain.system.SystemUser;
 import com.raymond.domain.UserTest;
+import com.raymond.domain.system.SystemUserRole;
 import com.raymond.dto.UserDto;
+import com.raymond.mapper.SystemRoleMapper;
 import com.raymond.mapper.SystemUserMapper;
+import com.raymond.mapper.SystemUserRoleMapper;
+import com.raymond.service.SystemRoleService;
 import com.raymond.service.SystemUserService;
 import com.raymond.utils.IpUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -33,6 +38,10 @@ public class SystemUserServiceImpl implements SystemUserService {
     private HttpServletRequest request;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private SystemRoleMapper systemRoleMapper;
+    @Autowired
+    private SystemUserRoleMapper systemUserRoleMapper;
 
     @Override
     public Page<SystemUser> search(UserDto userDto) {
@@ -85,11 +94,24 @@ public class SystemUserServiceImpl implements SystemUserService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int addUser(SystemUser systemUser) {
+    public int addUser(SystemUser systemUser,Long roleId) {
+        SystemUserRole systemUserRole = new SystemUserRole();
         String ip = IpUtils.getIpAddr(request); // 登录IP
         systemUser.setLoginIp(ip);
         systemUser.setPassword(passwordEncoder.encode(systemUser.getPassword()));
         int row = this.systemUserMapper.insert(systemUser);
+        if (row > 0) {
+            systemUserRole.setUserId(systemUser.getUserId());
+        }
+        LambdaQueryWrapper<SystemRole> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(roleId != 0,SystemRole::getRoleId, roleId);
+        SystemRole systemRole = this.systemRoleMapper.selectOne(lambdaQueryWrapper);
+        if (systemRole != null) {
+            systemUserRole.setRoleId(systemRole.getRoleId());
+            systemUserRole.setCreateTime(new Date());
+            // 添加中间表数据
+            this.systemUserRoleMapper.insert(systemUserRole);
+        }
         return row;
     }
 

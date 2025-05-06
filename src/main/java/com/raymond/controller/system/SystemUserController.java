@@ -1,4 +1,4 @@
-package com.raymond.controller;
+package com.raymond.controller.system;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.raymond.common.HttpStatus;
@@ -32,14 +32,14 @@ public class SystemUserController {
         return row > 0 ? AjaxResult.success("Delete user successfully") : AjaxResult.error("Failed to delete user");
     }
 
-    @PostMapping
-    public AjaxResult add(@RequestBody SystemUser systemUser) {
+    @PostMapping("/{roleId}")
+    public AjaxResult add(@RequestBody SystemUser systemUser,@PathVariable Long roleId) {
         SystemUser detail = this.systemUserService.getUserDetail(systemUser);
         if (detail != null) {
             return AjaxResult.error(HttpStatus.CREATE_USER_REPEAT,"User already exist");
         }
         systemUser.setRegisterTime(new Date());
-        int row = this.systemUserService.addUser(systemUser);
+        int row = this.systemUserService.addUser(systemUser,roleId);
         return row >0 ? AjaxResult.success("Add user successfully") : AjaxResult.error("Failed to add user");
     }
 

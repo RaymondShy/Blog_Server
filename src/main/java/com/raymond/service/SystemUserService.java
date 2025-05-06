@@ -18,7 +18,7 @@ public interface SystemUserService {
     // 删除用户
     public int deleteUserById(Long[] idList);
     // TODO 新增管理员后续要修改
-    public int addUser(SystemUser systemUser);
+    public int addUser(SystemUser systemUser,Long roleId);
     // TODO 修改管理员后续要修改
     public int editUser(SystemUser systemUser);
     // 根据用户名查询用户
