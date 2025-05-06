@@ -3,7 +3,7 @@ package com.raymond.domain;
 import com.baomidou.mybatisplus.annotation.TableField;
 
 public class BaseEntity {
-    @com.fasterxml.jackson.annotation.JsonIgnore // 序列化JSON时不反悔该字段
+    @com.fasterxml.jackson.annotation.JsonIgnore // 序列化JSON时不返回该字段
     @TableField(exist = false,select = false)
     private int pageNum = 1;
     @com.fasterxml.jackson.annotation.JsonIgnore
