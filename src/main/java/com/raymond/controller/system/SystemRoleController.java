@@ -28,16 +28,16 @@ public class SystemRoleController {
         return AjaxResult.success(roleListPage);
     }
 
-    @PostMapping
-    public AjaxResult addRole(SystemRole systemRole,Long[] permissionIds) {
-        int row = this.systemRoleService.addRole(systemRole,permissionIds);
-        return row > 0 ? AjaxResult.success("Delete user successfully") : AjaxResult.error("Failed to delete user");
+    @PostMapping("/{idList}")
+    public AjaxResult addRole(@RequestBody SystemRole systemRole,@PathVariable Long[] idList) {
+        int row = this.systemRoleService.addRole(systemRole,idList);
+        return row > 0 ? AjaxResult.success("ADD user successfully") : AjaxResult.error("ADD to delete user");
     }
 
-    @PutMapping
-    public AjaxResult updateRole(SystemRole systemRole,Long[] permissionIds) {
-        int row = this.systemRoleService.updateRole(systemRole,permissionIds);
-        return row > 0 ? AjaxResult.success("Update user successfully") : AjaxResult.error("Failed to update user");
+    @PutMapping("/{idList}")
+    public AjaxResult updateRole(@RequestBody SystemRole systemRole,@PathVariable Long[] idList) {
+        int row = this.systemRoleService.updateRole(systemRole,idList);
+        return row > 0 ? AjaxResult.success("Update role successfully") : AjaxResult.error("Failed to update role");
     }
 
     @DeleteMapping("/{idList}")

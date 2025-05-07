@@ -188,7 +188,6 @@ public class SystemRoleServiceImpl implements SystemRoleService {
     private void handleRolePermissions(SystemRole systemRole,Long[] permissionIds) {
         // 删除旧权限
         this.deleteOldPermission(systemRole.getRoleId());
-
         // 如果有新权限则添加
         if (permissionIds != null && permissionIds.length > 0) {
             List<SystemRolePermission> rolePermissions = batchFunctionSystemRolePermission(systemRole, permissionIds);

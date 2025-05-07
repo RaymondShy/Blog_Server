@@ -1,12 +1,14 @@
 package com.raymond.domain.system;
 
+import com.raymond.domain.BaseEntity;
+
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * system_permission: 系统权限表
  */
-public class SystemPermission implements Serializable {
+public class SystemPermission extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long permissionId;
     private String permName;
