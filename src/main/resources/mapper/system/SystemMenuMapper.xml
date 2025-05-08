@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.raymond.mapper.system.SystemMenuMapper">
+
+    <select id="findByMenuId" parameterType="Long" resultType="com.raymond.domain.system.SystemCarousel">
+        select system_carousel.*
+        from system_menu
+                 inner join system_menu_carousel on system_menu.menu_id = system_menu_carousel.menu_id
+                 inner join system_carousel on system_menu_carousel.carousel_id = system_carousel.carousel_id
+        where system_menu.menu_id = #{menuId}
+
+    </select>
+
+
+</mapper>

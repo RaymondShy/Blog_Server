@@ -1,4 +1,4 @@
-package com.raymond.mapper;
+package com.raymond.mapper.system;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.raymond.domain.system.SystemRolePermission;

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.raymond.mapper.system.SystemMenuCarouselMapper">
+
+
+    <!-- 批量插入 SQL -->
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO system_menu_carousel (menu_id, carousel_id)
+        VALUES
+        <foreach collection="menuCarouselList" item="item" separator=",">
+            (#{item.menuId}, #{item.carouselId})
+        </foreach>
+    </insert>
+
+
+</mapper>

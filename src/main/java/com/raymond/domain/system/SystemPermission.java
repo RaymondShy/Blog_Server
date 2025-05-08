@@ -1,5 +1,6 @@
 package com.raymond.domain.system;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.raymond.domain.BaseEntity;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.util.Date;
  */
 public class SystemPermission extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
+    @TableId
     private Long permissionId;
     private String permName;
     private String permCode;
