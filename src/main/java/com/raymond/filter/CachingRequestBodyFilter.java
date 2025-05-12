@@ -2,6 +2,7 @@ package com.raymond.filter;
 
 import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
+import org.springframework.web.util.ContentCachingRequestWrapper;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -23,9 +24,8 @@ public class CachingRequestBodyFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
-        CachedBodyHttpServletRequest cachedRequest =
-            new CachedBodyHttpServletRequest((HttpServletRequest) request);
-        chain.doFilter(cachedRequest, response);
+        ContentCachingRequestWrapper wrappedRequest = new ContentCachingRequestWrapper((HttpServletRequest) request);
+        chain.doFilter(wrappedRequest, response);
     }
 
     @Override

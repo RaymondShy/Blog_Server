@@ -8,6 +8,10 @@ spring:
     username: root
     password: root040921
     driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 50MB
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
@@ -17,3 +21,17 @@ mybatis-plus:
       id-type: auto
   type-aliases-package: com.raymond.domain
   mapper-locations: classpath*:/mapper/**/*.xml
+
+langchain4j:
+  open-ai:
+    chat-model:
+      # 课程测试 KEY，需要更换为实际可用 KEY
+      api-key: sk-xxx
+      model-name: qwen-plus
+      # 百炼兼容OpenAI接口规范，base_url为https://dashscope.aliyuncs.com/compatible-mode/v1
+      base-url: xxx
+oss:
+  endpoint: xxx
+  accessKeyId: xxx
+  accessKeySecret: xxx
+  bucketName: codecify-bucket

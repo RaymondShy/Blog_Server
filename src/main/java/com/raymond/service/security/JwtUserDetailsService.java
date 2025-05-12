@@ -2,7 +2,7 @@ package com.raymond.service.security;
 
 import com.raymond.domain.system.SystemPermission;
 import com.raymond.domain.system.SystemUser;
-import com.raymond.service.SystemUserService;
+import com.raymond.service.system.SystemUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

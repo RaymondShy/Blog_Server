@@ -1,4 +1,4 @@
-package com.raymond.service.impl;
+package com.raymond.service.impl.system;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
@@ -9,11 +9,9 @@ import com.raymond.domain.system.SystemMenu;
 import com.raymond.domain.system.SystemMenuCarousel;
 import com.raymond.exception.BusinessException;
 import com.raymond.factory.PageFactory;
-import com.raymond.mapper.system.SystemCarouselMapper;
 import com.raymond.mapper.system.SystemMenuCarouselMapper;
 import com.raymond.mapper.system.SystemMenuMapper;
-import com.raymond.service.SystemCarouselService;
-import com.raymond.service.SystemMenuService;
+import com.raymond.service.system.SystemMenuService;
 import com.raymond.utils.LambdaUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -224,7 +222,7 @@ public class SystemMenuServiceImpl implements SystemMenuService {
      * 查询条件封装类
      */
     @RequiredArgsConstructor
-    private static class QueryCondition<T> {
+    public static class QueryCondition<T> {
         private final T value;
         private final Consumer<T> action;
 

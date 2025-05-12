@@ -1,4 +1,4 @@
-package com.raymond.service.impl;
+package com.raymond.service.impl.system;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -15,7 +15,7 @@ import com.raymond.dto.UserDto;
 import com.raymond.mapper.system.SystemRoleMapper;
 import com.raymond.mapper.system.SystemUserMapper;
 import com.raymond.mapper.system.SystemUserRoleMapper;
-import com.raymond.service.SystemUserService;
+import com.raymond.service.system.SystemUserService;
 import com.raymond.utils.IpUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.raymond.service.impl;
+package com.raymond.service.impl.system;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -7,7 +7,7 @@ import com.raymond.domain.system.SystemRole;
 import com.raymond.domain.system.SystemRolePermission;
 import com.raymond.mapper.system.SystemRoleMapper;
 import com.raymond.mapper.system.SystemRolePermissionMapper;
-import com.raymond.service.SystemRoleService;
+import com.raymond.service.system.SystemRoleService;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

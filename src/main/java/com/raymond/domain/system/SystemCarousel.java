@@ -2,14 +2,14 @@ package com.raymond.domain.system;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.raymond.domain.BaseEntity;
+import com.raymond.domain.BaseQuery;
 import lombok.Builder;
 
 import java.io.Serializable;
 import java.util.Date;
 
 @Builder
-public class SystemCarousel extends BaseEntity implements Serializable {
+public class SystemCarousel extends BaseQuery implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(type = IdType.AUTO)
@@ -18,7 +18,7 @@ public class SystemCarousel extends BaseEntity implements Serializable {
     private String imageUrl;
     private String carouselTitle;
     private String linkUrl;
-    private Integer sortOrder;
+    private Integer sortOrderNum;
     private String status;
     private Date startTime;
     private Date endTime;
@@ -34,7 +34,7 @@ public class SystemCarousel extends BaseEntity implements Serializable {
                 ", imageUrl='" + imageUrl + '\'' +
                 ", carouselTitle='" + carouselTitle + '\'' +
                 ", linkUrl='" + linkUrl + '\'' +
-                ", sortOrder=" + sortOrder +
+                ", sortOrderNum=" + sortOrderNum +
                 ", status='" + status + '\'' +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
@@ -84,12 +84,12 @@ public class SystemCarousel extends BaseEntity implements Serializable {
         this.linkUrl = linkUrl;
     }
 
-    public Integer getSortOrder() {
-        return sortOrder;
+    public Integer getSortOrderNum() {
+        return sortOrderNum;
     }
 
-    public void setSortOrder(Integer sortOrder) {
-        this.sortOrder = sortOrder;
+    public void setSortOrderNum(Integer sortOrderNum) {
+        this.sortOrderNum = sortOrderNum;
     }
 
     public String getStatus() {
@@ -143,13 +143,13 @@ public class SystemCarousel extends BaseEntity implements Serializable {
     public SystemCarousel() {
     }
 
-    public SystemCarousel(Long carouselId, Long menuId, String imageUrl, String carouselTitle, String linkUrl, Integer sortOrder, String status, Date startTime, Date endTime, Integer carouselTime, Date createTime, Date updateTime) {
+    public SystemCarousel(Long carouselId, Long menuId, String imageUrl, String carouselTitle, String linkUrl, Integer sortOrderNum, String status, Date startTime, Date endTime, Integer carouselTime, Date createTime, Date updateTime) {
         this.carouselId = carouselId;
         this.menuId = menuId;
         this.imageUrl = imageUrl;
         this.carouselTitle = carouselTitle;
         this.linkUrl = linkUrl;
-        this.sortOrder = sortOrder;
+        this.sortOrderNum = sortOrderNum;
         this.status = status;
         this.startTime = startTime;
         this.endTime = endTime;

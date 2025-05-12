@@ -1,6 +1,6 @@
 package com.raymond.controller;
 
-import com.raymond.service.SystemUserService;
+import com.raymond.service.system.SystemUserService;
 import com.raymond.service.security.JwtUserDetailsService;
 import com.raymond.utils.AjaxResult;
 import com.raymond.utils.JWTTokenUtil;

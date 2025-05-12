@@ -1,4 +1,4 @@
-package com.raymond.service.impl;
+package com.raymond.service.impl.system;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -8,7 +8,7 @@ import com.raymond.domain.system.SystemPermission;
 import com.raymond.domain.system.SystemRolePermission;
 import com.raymond.mapper.system.SystemPermissionMapper;
 import com.raymond.mapper.system.SystemRolePermissionMapper;
-import com.raymond.service.SystemPermissionService;
+import com.raymond.service.system.SystemPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

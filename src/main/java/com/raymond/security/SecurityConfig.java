@@ -64,6 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests(authorize ->{
             // TODO 除了登录请求其他请求全部拦截
             authorize.antMatchers("/api/login/pwd").permitAll()
+                    .antMatchers("/api/ai/generate").permitAll()
                     .anyRequest().authenticated();
         });
         // 异常处理

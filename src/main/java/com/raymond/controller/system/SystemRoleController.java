@@ -2,7 +2,7 @@ package com.raymond.controller.system;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.raymond.domain.system.SystemRole;
-import com.raymond.service.SystemRoleService;
+import com.raymond.service.system.SystemRoleService;
 import com.raymond.utils.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

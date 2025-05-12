@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.raymond.common.HttpStatus;
 import com.raymond.domain.system.SystemUser;
 import com.raymond.dto.UserDto;
-import com.raymond.service.SystemUserService;
+import com.raymond.service.system.SystemUserService;
 import com.raymond.utils.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

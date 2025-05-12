@@ -1,7 +1,6 @@
-package com.raymond.service;
+package com.raymond.service.system;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.raymond.domain.system.SystemPermission;
 import com.raymond.domain.system.SystemRole;
 
 import java.util.List;
